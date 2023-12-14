@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Share_content</title>
+    <link rel="stylesheet" href="../static/styles/camera.css" />
+    <script src="../static/scripts/camera.js"></script>
+    <style></style>
+  </head>
+  <body data-user-id="{{ user.id }}">
+    <div class="container">
+      <video id="video" autoplay></video>
+    </div>
+
+    <div class="btn">
+      <button id="snap">Snap Photo</button>
+      <button id="start">Start Recording</button>
+      <button id="stop">Stop Recording</button>
+    </div>
+  </body>
+</html>

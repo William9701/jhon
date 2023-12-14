@@ -1,0 +1,127 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: url("../images/Connect.jpg");
+	
+}
+
+h2{
+	text-align: center;
+	font-size: 2rem;
+	margin: .5rem;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.container{
+	width: 100%;
+	height: auto;
+	display: flex;
+	margin-left: 600px;
+	align-items: center;
+	
+}
+
+#video {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	min-width: 100%;
+	min-height: 100%;
+
+  }
+.btn {
+	position: relative;
+	z-index: 1;
+	margin-top: 35%;
+	margin-left: 35%;
+	justify-content: space-between;
+  }
+
+#snap{
+	width: auto;
+	padding: 1rem 2rem;
+	background: linear-gradient(to right, transparent 50%, blue 50%, red);
+	background-position: left;
+	transition: background-position .5s;
+	color: black;
+	font-weight: bold;
+	font-size: 1rem;
+	cursor: pointer;
+	border: 1px solid grey;
+	border-radius: .3rem;
+	margin-top: 3rem;
+}
+
+#snap:hover {
+	background-position: right;
+	transition: .5s;
+	color: white;
+}
+#start{
+	width: auto;
+	padding: 1rem 2rem;
+	background: blueviolet;
+	background-position: left;
+	transition: background-position .5s;
+	color: black;
+	font-weight: bold;
+	font-size: 1rem;
+	cursor: pointer;
+	border: 1px solid grey;
+	border-radius: .3rem;
+	margin-top: 3rem;
+	margin-left: 3%;
+}
+#start:hover {
+	background-position: right;
+	transition: .5s;
+	color: white;
+}
+#stop{
+	width: auto;
+	padding: 1rem 2rem;
+	background: red;
+	background-position: left;
+	transition: background-position .5s;
+	color: black;
+	font-weight: bold;
+	font-size: 1rem;
+	cursor: pointer;
+	border: 1px solid grey;
+	border-radius: .3rem;
+	margin-top: 3rem;
+	margin-left: 3%;
+}
+#stop:hover {
+	background-position: right;
+	transition: .5s;
+	color: white;
+}
+
+.flash {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: white; /* Adjust the color as needed */
+	opacity: 1;
+	z-index: 9999;
+	animation: flashAnimation 0.6s ease-out; /* Adjust the animation duration as needed */
+  }
+  
+  @keyframes flashAnimation {
+	0% {
+	  opacity: 1;
+	}
+	100% {
+	  opacity: 0;
+	}
+  }
+  

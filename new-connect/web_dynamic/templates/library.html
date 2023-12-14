@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connect</title>
+    <link rel="stylesheet" href="../static/styles/stlye.css" />
+    <script src="../static/scripts/script.js"></script>
+  </head>
+  <body>
+    <nav class="flex-div">
+      <div class="nav-left flex-div">
+        <img src="../static/images/menu.png" class="menu-icon" />
+        <a href="/content"
+          ><img src="../static/images/Connect-logo.png" class="logo"
+        /></a>
+      </div>
+      <div class="nav-midle flex-div">
+        <div class="search-box flex-div">
+          <form action="" class="search-bar">
+            <input type="text" name="q" placeholder="Search By Location" />
+            <button type="submit">
+              <img src="../static/images/search.png" />
+            </button>
+          </form>
+        </div>
+        <img src="../static/images/voice-search.png" class="mic-icon" alt="" />
+      </div>
+      <div class="nav-right flex-div">
+        <a href="/camera/{{ user.id }}"
+          ><img src="../static/images/upload.png"
+        /></a>
+        <div class="location">
+          <img src="../static/images/placeholder.png" />
+          <div class="sub-menu-1">
+            <ul>
+              {% set used_names = [] %} {% for location in locations %} {% if
+              location.name not in used_names %}
+              <li>
+                <a
+                  href="#"
+                  class="location-link"
+                  data-name="{{ location.name }}"
+                  >{{ location.name }}</a
+                >
+              </li>
+              {% set _ = used_names.append(location.name) %} {% endif %} {%
+              endfor %}
+            </ul>
+          </div>
+        </div>
+        <a href="/logout"><img src="../static/images/logout.png" /></a>
+      </div>
+    </nav>
+
+    <!-------------------------sidebar---------------->
+    <div class="sidebar small-sidebar">
+      <div class="shortcut-links">
+        <a href="/user_index/{{ user.id }}"
+          ><img src="../static/images/home.png" alt="" />
+          <p>Home</p></a
+        >
+        <a href="#"
+          ><img src="../static/images/explore.png" alt="" />
+          <p>Explore</p></a
+        >
+        <a href="#"
+          ><img src="../static/images/subscriprion.png" alt="" />
+          <p>Subscriprion</p></a
+        >
+        <a href="#"
+          ><img src="../static/images/library.png" alt="" />
+          <p>Library</p></a
+        >
+        <a href="#"
+          ><img src="../static/images/history.png" alt="" />
+          <p>History</p></a
+        >
+        <a href="#"
+          ><img src="../static/images/playlist.png" alt="" />
+          <p>Playlist</p></a
+        >
+        <a href="#"
+          ><img src="../static/images/messages.png" alt="" />
+          <p>Messages</p></a
+        >
+        <a href="#"
+          ><img src="../static/images/show-more.png" alt="" />
+          <p>Show More</p></a
+        >
+        <hr />
+      </div>
+      <div class="subscribed-list">
+        <h3>SUBSCRIBED</h3>
+        <a href=""
+          ><img src="../static/images/Jack.png" alt="" />
+          <p>Jack Nicholas</p></a
+        >
+        <a href=""
+          ><img src="../static/images/simon.png" alt="" />
+          <p>Simon Nicholas</p></a
+        >
+        <a href=""
+          ><img src="../static/images/tom.png" alt="" />
+          <p>tom Nicholas</p></a
+        >
+        <a href=""
+          ><img src="../static/images/megan.png" alt="" />
+          <p>megan Nicholas</p></a
+        >
+        <a href=""
+          ><img src="../static/images/cameron.png" alt="" />
+          <p>cameron Nicholas</p></a
+        >
+      </div>
+    </div>
+
+    <!----------main--------->
+
+    <div class="container">
+      <div class="list-container">
+        {% for library in libraries %} {%if user.id == library.user_id%}
+        <div class="vid-list">
+          <a href="/play-lib/{{ library.id }}">
+            <video
+              autoplay
+              src="{{ library.content }}"
+              class="thumbnail"
+            ></video>
+          </a>
+
+          <div class="flex-div">
+            <img src="../static/images/Jack.png" />
+            <div class="vid-info">
+              {% for user in users %} {% if user.id == library.user_id %}
+              <a href="play/{{ content.id }}"
+                >{{ user.first_name }} {{ user.last_name }}</a
+              >
+              {% endif %} {% endfor %}
+              <p>{{ library.description }}</p>
+            </div>
+          </div>
+        </div>
+        {% endif %}{% endfor %}
+      </div>
+    </div>
+  </body>
+</html>

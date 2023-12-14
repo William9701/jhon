@@ -1,0 +1,162 @@
+body{
+	margin: 0;
+	padding: 0;
+	background: url(../images/Connect.jpg);
+	background-size: cover;
+	font-family: sans-serif;
+}
+.loginbox{
+	width: 420px;
+	height: 620px;
+	background: transparent;
+	backdrop-filter: blur(4px) saturate(180%);
+	color: #fff;
+	top: 60%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%, -50%);
+	box-sizing: border-box;
+	padding: 70px 30px;
+	border-radius: 10px;
+}
+
+@media (max-width: 900px){
+	.loginbox{
+		top: 55%;
+		width: 420px;
+		height: 560px;
+	}
+	.loginbox h1{
+		font-size: 22px;
+	}
+	.loginbox form p{
+		font-size: 18px;
+	}
+	.loginbox form input[type="text"], input[type="password"]{
+		font-size: 20px;
+		height: 50px;
+	}
+	.loginbox form input[type="submit"]{
+		font-size: 28px;
+	}
+	.loginbox a{
+		font-size: 5px;
+	}
+}
+@media (max-width:420px){
+	.loginbox{
+		
+		width: 320px;
+		height: 560px;
+		top: 50%;
+	}
+}
+.avatar{
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	position: absolute;
+	top: -50px;
+	left: calc(50% - 50px);
+	background: #fb2525;
+}
+
+h1{
+	margin: 0;
+	padding: 0 0 20px;
+	text-align: center;
+	font-size: 32px;
+
+}
+.loginbox p{
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	font-size: 24px;
+}
+
+.loginbox input{
+	width: 100%;
+	margin-bottom: 40px;
+}
+
+.loginbox input[type="text"], input[type="password"]{
+	border: none;
+	border-bottom: 1px solid #fff;
+	background: transparent;
+	outline: none;
+	height: 70px;
+	color: white;
+	font-size: 26px;
+}
+
+.loginbox input[type="submit"]{
+	border: none;
+	outline: none;
+	height: 60px;
+	background: #fb2525;
+	color: white;
+	font-size: 28px;
+	border-radius: 20px;
+}
+
+.loginbox input[type="submit"]:hover{
+	cursor: pointer;
+	background: #ffc107;
+	color: #000;
+}
+
+.loginbox a{
+	text-decoration: none;
+	font-size: 22px;
+	line-height: 40px;
+	color: darkgray;
+}
+.loginbox a:hover{
+	color: #ffc107;
+}
+
+.input-box{
+	width: 100%;
+	max-width: 500px;
+	display: flex;
+	align-items: center;
+	
+}
+
+.input-box input{
+	width: 100%;
+}
+
+.input-box img{
+	width: 35px;
+	cursor: pointer;
+	padding-bottom: 35px;
+}
+.flashes li{
+	color: white;
+	font-size: 30px;
+	text-decoration: none;
+	list-style: none;
+}
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+	flex: 1;
+	
+
+}
+.toast-body{
+	font-size: 22px;
+}
+
+
+
+
+
+
+
+
+

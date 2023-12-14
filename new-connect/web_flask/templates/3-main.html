@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/main.css?cache_id={{ cache_id }}" />
+    <title>Connect</title>
+  </head>
+  <body>
+    <div class="top-header">
+      <div class="search-bar">
+        Search
+        <div class="button">
+          <button>Search</button>
+        </div>
+      </div>
+      <div class="circle-bags">
+        <div class="circles"></div>
+        <div class="circles"></div>
+        <div class="circles"></div>
+      </div>
+    </div>
+    <div class="second-header">
+      <nav class="navbar">
+        <div class="navbar-toggle" onclick="toggleNavbar()">☰</div>
+        <ul id="list">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="content">
+      {% for content in contents %}
+      <div class="wrap">
+        <div class="first-content"></div>
+        <div class="second-content">
+          <div class="user-head"></div>
+          <div class="discription">{{ content.content }}</div>
+        </div>
+        <div class="third-content"></div>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+  <script>
+    function toggleNavbar() {
+      var navbarList = document.querySelector("#list");
+      navbarList.classList.toggle("show");
+    }
+  </script>
+</html>

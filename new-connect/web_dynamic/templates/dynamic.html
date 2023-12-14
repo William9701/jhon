@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../static/styles/dynamic.css?cache_id={{ cache_id }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="/static/scripts/dynamic.js?cache_id={{ cache_id }}"></script>
+    <title>Connect</title>
+  </head>
+  <body>
+    <section class="header">
+      <nav>
+        <a href="main.html"
+          ><img
+            src="../static/images/—Pngtree—connect and c logo design_5057615.png"
+        /></a>
+        <section class="top">
+          <div class="menu-bar">
+            <i class="fa fa-times" onclick="hideMenu()"></i>
+            <ul>
+              <li><a class="active" href="">Home</a></li>
+              <li><a href="/profile/{{ user.id }}">My_Sessions</a></li>
+              <li>
+                <a href="">Locations</a>
+                <div class="sub-menu-1">
+                  <ul>
+                    {% set used_names = [] %} {% for location in locations %} {%
+                    if location.name not in used_names %}
+                    <li>
+                      <a
+                        href="#"
+                        class="location-link"
+                        data-name="{{ location.name }}"
+                        >{{ location.name }}</a
+                      >
+                    </li>
+                    {% set _ = used_names.append(location.name) %} {% endif %}
+                    {% endfor %}
+                  </ul>
+                </div>
+              </li>
+              <li><a href="/logout">Logout</a></li>
+            </ul>
+          </div>
+        </section>
+
+        <i class="fa fa-bars" onclick="showMenu()"></i>
+      </nav>
+      <div class="text_box">
+        <h1>Connect</h1>
+        <p>A place where we only share live contents</p>
+        <p id="welcome">Welcome {{ user.first_name }}</p>
+        <a href="/camera/{{ user.id }}" class="hero-btn">Share Content</a>
+      </div>
+    </section>
+
+    <section class="container">
+      <form action="" class="search-bar">
+        <input type="text" placeholder="Search by Location" name="q" />
+        <button type="submit">
+          <img src="../static/images/search.png" alt="" />
+        </button>
+      </form>
+    </section>
+
+    <section class="live-body">
+      <div class="row">
+        <div class="live-logo">
+          <img src="../static/images/live-icon.png" alt="" />
+        </div>
+        {% for content in contents %}
+        <div class="event-body">
+          <div class="content">
+            <video class="video" autoplay src="{{ content.content }}"></video>
+          </div>
+          <div class="user">
+            <img
+              id="user-logo"
+              src="../static/images/icons8-user-16.png"
+              alt=""
+            />
+            <div class="user-description">
+              {{ user.first_name }} {{ user.last_name}}
+            </div>
+          </div>
+          <div class="content-discription">{{ content.content }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="container">
+      <form action="" class="search-bar">
+        <input type="text" placeholder="Search by Location" name="q" />
+        <button type="submit">
+          <img src="../static/images/search.png" alt="" />
+        </button>
+      </form>
+    </section>
+
+    <section class="live-body">
+      <div class="row">
+        <div class="live-logo">
+          <img src="../static/images/end.png" alt="" />
+        </div>
+        {% for content in contents %} {% for user in users %} {% if
+        content.user_id == user.id %}
+        <div class="event-body">
+          <div class="content"></div>
+          <div class="user">
+            <img
+              id="user-logo"
+              src="../static/images/icons8-user-16.png"
+              alt=""
+            />
+            <div class="user-description">
+              {{ user.first_name }} {{ user.last_name}}
+            </div>
+          </div>
+          <div class="content-discription">{{ content.content }}</div>
+        </div>
+        {% endif %} {% endfor %} {% endfor %}
+      </div>
+    </section>
+
+    <section class="reviews">
+      <h1>What Our Users Say</h1>
+      <div class="review-row">
+        <div class="review-col">
+          <img
+            src="static/images/michael-dam-mEZ3PoFGs_k-unsplash.jpg"
+            alt=""
+          />
+          <div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
+              natus placeat accusamus illum facere iusto perferendis iure
+              repellat voluptatem! Sint commodi, minus praesentium molestias
+              accusantium consectetur sequi laboriosam ea architecto!
+            </p>
+            <h3>Mark Nwaigwe</h3>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+          </div>
+        </div>
+        <div class="review-col">
+          <img
+            src="static/images/albert-dera-ILip77SbmOE-unsplash.jpg"
+            alt=""
+          />
+          <div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
+              natus placeat accusamus illum facere iusto perferendis iure
+              repellat voluptatem! Sint commodi, minus praesentium molestias
+              accusantium consectetur sequi laboriosam ea architecto!
+            </p>
+            <h3>kate Nwaigwe</h3>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+          </div>
+        </div>
+        <div class="review-col">
+          <img
+            src="static/images/albert-dera-ILip77SbmOE-unsplash.jpg"
+            alt=""
+          />
+          <div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
+              natus placeat accusamus illum facere iusto perferendis iure
+              repellat voluptatem! Sint commodi, minus praesentium molestias
+              accusantium consectetur sequi laboriosam ea architecto!
+            </p>
+            <h3>kate Nwaigwe</h3>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+          </div>
+        </div>
+        <div class="review-col">
+          <img
+            src="static/images/albert-dera-ILip77SbmOE-unsplash.jpg"
+            alt=""
+          />
+          <div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
+              natus placeat accusamus illum facere iusto perferendis iure
+              repellat voluptatem! Sint commodi, minus praesentium molestias
+              accusantium consectetur sequi laboriosam ea architecto!
+            </p>
+            <h3>kate Nwaigwe</h3>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+          </div>
+        </div>
+        <div class="review-col">
+          <img
+            src="static/images/albert-dera-ILip77SbmOE-unsplash.jpg"
+            alt=""
+          />
+          <div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
+              natus placeat accusamus illum facere iusto perferendis iure
+              repellat voluptatem! Sint commodi, minus praesentium molestias
+              accusantium consectetur sequi laboriosam ea architecto!
+            </p>
+            <h3>kate Nwaigwe</h3>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+          </div>
+        </div>
+        <div class="review-col">
+          <img
+            src="static/images/albert-dera-ILip77SbmOE-unsplash.jpg"
+            alt=""
+          />
+          <div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
+              natus placeat accusamus illum facere iusto perferendis iure
+              repellat voluptatem! Sint commodi, minus praesentium molestias
+              accusantium consectetur sequi laboriosam ea architecto!
+            </p>
+            <h3>kate Nwaigwe</h3>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer">
+      <h4 id="about">About Us</h4>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, a
+        natus animi porro obcaecati praesentium eius eveniet voluptatibus.
+        <br />
+        Quas nemo rerum perferendis, dignissimos aperiam quisquam illo tempore
+        ex reiciendis accusantium.
+      </p>
+    </section>
+    <script>
+      var navLinks = document.getElementById("navLinks");
+
+      function showMenu() {
+        navLinks.style.right = "0";
+      }
+      function hideMenu() {
+        navLinks.style.right = "-200px";
+      }
+    </script>
+  </body>
+</html>

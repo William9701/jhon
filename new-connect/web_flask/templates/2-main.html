@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<HTML lang="en">
+    <HEAD>
+        <TITLE>Connect</TITLE>
+    </HEAD>
+    <BODY>
+        <H1>{{ h_1 }}</H1>
+        <UL>
+	    {% for user in users %}
+            <LI>{{ user.first_name }} {{ user.last_name }} ({{ user.id }}):
+	        <UL>
+		        {% for content in contents %}
+		        {% if content.user_id == user.id %}
+		        <LI>{{ content.content }}</LI>
+		        {% endif %}
+	                {% endfor %}
+		</UL>
+            </LI>
+	    {% endfor %}
+	</UL>
+    </BODY>
+</HTML>

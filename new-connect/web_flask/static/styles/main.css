@@ -1,0 +1,193 @@
+.top-header{
+	height: 50px;
+	border-bottom: 1px solid;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+}
+.second-header{
+	height: 70px;
+	border-bottom: 1px solid;
+	width: 100%;
+}
+.button{
+	margin-left: 300px;
+	margin-top: -18px;
+}
+.container{
+	width: 100%;
+	height: 1000px;
+	background-color: red;
+	padding: 5%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid red;
+	
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+	padding-left: 12%; /* Reset margin to ensure the container takes full width */
+}
+.circle-bags{
+	display: flex;
+	flex-direction: row;
+	margin-left: 22%;
+	
+}
+.circles{
+	border-radius: 50%;
+	border-style: solid;
+	border-color: white;
+	background-color: aqua;
+	height: 70%;
+	width: 40px;
+	margin-left: 20px;
+	margin-top: 2%;
+}
+.first-content{
+	border-radius: 2%;
+	height: 200px;
+	width: 200px;
+	background-color: black;
+	border-style: solid;
+	color: aliceblue;
+}
+
+.wrap{
+	margin-top: 3%;
+	width: 200px;
+	margin-left: 40px;
+}
+.second-content{
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	
+	height: 70px;
+	margin-bottom: 0%;
+}
+.user-head{
+	border-radius: 50%;
+	border-style: solid;
+	border-color: white;
+	background-color: black;
+	height: 50%;
+	width: 40px;
+	margin-top: 4%;
+}
+.discription{
+	border-style: solid;
+	border-radius: 10px;
+	height: 20%;
+	width: 100%;
+	background-color: black;
+	margin-top: 7%;
+	color: aliceblue;
+}
+.third-content{
+	border-style: solid;
+	border-radius: 10px;
+	height: 20px;
+	width: 100%;
+	background-color: black;
+	margin-top: -8%;
+}
+.content{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin-left: -4%;
+}
+/* Media query for screens with a width between 600px and 900px */
+@media screen and (min-width: 600px) and (max-width: 900px) {
+	/* Styles to apply when the screen width is between 600px and 900px */
+	body {
+	  background-color: lightgreen;
+	}
+
+	.button{
+		
+		margin-top: -17px;
+		margin-left: 120px;
+		
+	}
+	.content{
+		margin-left: -38px;
+	}
+	.search-bar{
+		width: 200px;
+		margin-left: 60px;
+	}
+	.circle-bags{
+		margin-left: 12%;
+	}
+	#list {
+		display: none; /* Hide the navigation links by default on small screens */
+		flex-direction: column; /* Stack the links vertically */
+		position: absolute;
+		top: 60px;
+		left: 0;
+		width: 100%;
+		
+	  }
+	
+	  #list.show {
+		display: flex;
+		margin-left: 180px;
+		margin-top: -10px;
+		
+	  }
+	
+	  .navbar li {
+
+		width: 10%; /* Make each list item take up the full width */
+		text-align: center;
+		margin-left: px;
+	  }
+	
+	  .navbar-toggle {
+		display: block; /* Show the toggle button on small screens */
+		cursor: pointer;
+		color: rgb(119, 6, 6);
+		font-size: 25px;
+	  }
+	  .navbar-toggle:hover{
+		background-color: blue;
+		border-radius: 3px;
+	  }
+  }
+
+
+  
+  .navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+  }
+  
+  .navbar ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+  }
+  
+  .navbar li {
+	margin: 0;
+  }
+  
+  .navbar a {
+	text-decoration: none;
+	color: white;
+	padding: 10px;
+	display: block;
+  }
+  
+  /* Add hover effect */
+  .navbar a:hover {
+	background-color: #555;
+  }
+  

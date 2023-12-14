@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connect</title>
+    <link rel="stylesheet" href="../static/styles/stlye.css" />
+    <script src="../static/scripts/script.js"></script>
+  </head>
+  <body>
+    <nav class="flex-div">
+      <div class="nav-left flex-div">
+        <img src="../static/images/menu.png" class="menu-icon" />
+        <a href="/content"
+          ><img src="../static/images/Connect-logo.png" class="logo"
+        /></a>
+      </div>
+      <div class="nav-midle flex-div">
+        <div class="search-box flex-div">
+          <form action="" class="search-bar">
+            <input type="text" name="q" placeholder="Search By Location" />
+            <button type="submit">
+              <img src="../static/images/search.png" />
+            </button>
+          </form>
+        </div>
+        <img src="../static/images/voice-search.png" class="mic-icon" alt="" />
+      </div>
+      <div class="nav-right flex-div">
+        <a href="/login"><img src="../static/images/upload.png" /></a>
+
+        <div class="location">
+          <img src="../static/images/placeholder.png" />
+          <div class="sub-menu-1">
+            <ul>
+              {% set used_names = [] %} {% for location in locations %} {% if
+              location.name not in used_names %}
+              <li>
+                <a
+                  href="#"
+                  class="location-link"
+                  data-name="{{ location.name }}"
+                  >{{ location.name }}</a
+                >
+              </li>
+              {% set _ = used_names.append(location.name) %} {% endif %} {%
+              endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-------------------------sidebar---------------->
+    <div class="sidebar small-sidebar">
+      <div class="shortcut-links">
+        <a href="/content"
+          ><img src="../static/images/home.png" alt="" />
+          <p>Home</p></a
+        >
+        <a href="/login"
+          ><img src="../static/images/explore.png" alt="" />
+          <p>Explore</p></a
+        >
+        <a href="/login"
+          ><img src="../static/images/subscriprion.png" alt="" />
+          <p>Subscriprion</p></a
+        >
+        <a href="/login"
+          ><img src="../static/images/library.png" alt="" />
+          <p>Library</p></a
+        >
+        <a href="/login"
+          ><img src="../static/images/history.png" alt="" />
+          <p>History</p></a
+        >
+        <a href="/login"
+          ><img src="../static/images/playlist.png" alt="" />
+          <p>Playlist</p></a
+        >
+        <a href="/login"
+          ><img src="../static/images/messages.png" alt="" />
+          <p>Messages</p></a
+        >
+        <a href=""
+          ><img src="../static/images/show-more.png" alt="" />
+          <p>Show More</p></a
+        >
+      </div>
+    </div>
+
+    <!----------main--------->
+
+    <div class="container">
+      <div class="banner">
+        <h1>Connect</h1>
+        <h3>A place where we only share live videos</h3>
+        <a href="/login" class="hero-btn">Login to get started</a>
+      </div>
+      <div class="list-container">
+        {% for content in contents %}
+        <div class="vid-list">
+          <a href="play/{{ content.id }}">
+            <video
+              autoplay
+              src="{{ content.content }}"
+              class="thumbnail"
+            ></video>
+          </a>
+
+          <div class="flex-div">
+            <img src="../static/images/Jack.png" />
+            <div class="vid-info">
+              {% for user in users %} {% if user.id == content.user_id %}
+              <a href="play/{{ content.id }}"
+                >{{ user.first_name }} {{ user.last_name }}</a
+              >
+              {% endif %} {% endfor %}
+              <p>{{ content.description }}</p>
+              <p>{{ content.number_of_views }} views</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  </body>
+</html>

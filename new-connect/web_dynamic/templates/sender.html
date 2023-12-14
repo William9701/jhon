@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sender</title>
+        <link rel="stylesheet" href="../static/styles/style-vid.css">
+    </head>
+    <body data-user-id="{{ user.id }}">
+        <div>
+            <input placeholder="Enter username..."
+                    type="text"
+                    id="username-input" /><br>
+            <button onclick="sendUsername()">Send</button>
+            <button onclick="startCall()">Start Call</button>
+        </div>
+        <div id="video-call-div">
+            <video muted id="local-video" autoplay></video>
+            <video id="remote-video" autoplay></video>
+            <div class="call-action-div">
+                <button onclick="muteVideo()">Mute Video</button>
+                <button onclick="muteAudio()">Mute Audio</button>
+                <button onclick="stopRecording()">End chat</button>
+            </div>
+        </div>
+        <script src="../static/scripts/sender.js"></script>
+    </body>
+
+</html>

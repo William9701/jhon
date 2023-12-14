@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up</title>
+    <link rel="stylesheet" href="../static/styles/signup.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="/static/scripts/1-connect.js?cache_id={{ cache_id }}"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+  <body>
+    <div class="toast" data-autohide="true" data-delay="5000">
+      <div class="toast-header">
+        <strong class="mr-auto">Message</strong>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">
+          ×
+        </button>
+      </div>
+      <div class="toast-body">
+        <!-- The message will be inserted here -->
+      </div>
+    </div>
+
+    <div class="loginbox">
+      <img src="../static/images/user.png" class="avatar" />
+      <h1>Sign Up</h1>
+      <form class="signup">
+        <p>Username</p>
+        <input type="text" name="username" placeholder="Enter Username" />
+        <p>First name</p>
+        <input type="text" name="first_name" placeholder="Enter First Name" />
+        <p>Last Name</p>
+        <input type="text" name="last_name" placeholder="Enter Last Name" />
+        <p>Email</p>
+        <input type="text" name="email" placeholder="Enter Email" />
+        <p>Location</p>
+        <input type="text" name="location" placeholder="Eg, Lagos" />
+        <p>Description</p>
+        <input
+          type="text"
+          name="description"
+          placeholder="Describe yourself in a few word"
+        />
+        <p>Password</p>
+        <div class="input-box"> 
+          <input id="password"
+          type="password"
+          name="password"
+          placeholder="Enter Password, atleast 8 characters"/>
+          <img id="eyeicon" src="../static/images/eye-close.png" >
+
+        </div>
+        
+        <p>Password</p>
+        <div class="input-box"> 
+        <input id="password_2"
+          type="password"
+          name="re_password"
+          placeholder="Re-enter Password"
+        />
+        <img id="eyeicon_2" src="../static/images/eye-close.png" >
+        </div>
+        <input type="submit" name="" value="Sign Up" />
+      </form>
+    </div>
+
+    <script>
+    let eyeicon = document.getElementById("eyeicon");
+    let password = document.getElementById("password");
+
+    let eyeicon_2 = document.getElementById("eyeicon_2");
+    let password_2 = document.getElementById("password_2");
+
+    eyeicon.onclick = function () {
+      if (password.type == "password") {
+          password.type = "text";
+          eyeicon.src = "../static/images/eye-open.png"
+      } else {
+          password.type = "password";
+          eyeicon.src = "../static/images/eye-close.png"
+        }
+    };
+
+    eyeicon_2.onclick = function () {
+      if (password_2.type == "password") {
+          password_2.type = "text";
+          eyeicon_2.src = "../static/images/eye-open.png"
+      } else {
+          password_2.type = "password";
+          eyeicon_2.src = "../static/images/eye-close.png"
+        }
+    };
+    </script>
+  </body>
+</html>

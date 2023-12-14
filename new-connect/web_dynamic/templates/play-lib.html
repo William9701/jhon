@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Play Video</title>
+    <link rel="stylesheet" href="../static/styles/stlye.css" />
+  </head>
+  <body>
+    <nav class="flex-div">
+      <div class="nav-left flex-div">
+        <img src="../static/images/menu.png" class="menu-icon" />
+        <a href="/content"
+          ><img src="../static/images/Connect-logo.png" class="logo"
+        /></a>
+      </div>
+      <div class="nav-midle flex-div">
+        <div class="search-box flex-div">
+          <form action="" class="search-bar">
+            <input type="text" name="q" placeholder="Search By Location" />
+            <button type="submit">
+              <img src="../static/images/search.png" />
+            </button>
+          </form>
+        </div>
+        <img src="../static/images/voice-search.png" class="mic-icon" alt="" />
+      </div>
+      <div class="nav-right flex-div">
+        <a href="/login"><img src="../static/images/upload.png" /></a>
+
+        <img src="../static/images/more.png" />
+        <div class="location">
+          <img src="../static/images/placeholder.png" />
+          <div class="sub-menu-1">
+            <ul>
+              {% set used_names = [] %} {% for location in locations %} {% if
+              location.name not in used_names %}
+              <li>
+                <a
+                  href="#"
+                  class="location-link"
+                  data-name="{{ location.name }}"
+                  >{{ location.name }}</a
+                >
+              </li>
+              {% set _ = used_names.append(location.name) %} {% endif %} {%
+              endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container play-container">
+      <div class="row">
+        <div class="play-video">
+          <video controls autoplay>
+            <source src="{{ library.content }}" type="video/mp4" />
+          </video>
+
+          <div class="tags">
+            <a href="">#Coding</a> <a href="">#Html</a> <a href="">#CSS</a>
+            <a href="">#Javascript</a>
+          </div>
+          <h3>{{ library.description }}</h3>
+          <div class="play-video-info">
+            <p>0 views &bull; 6 days ago</p>
+            <div>
+              <a href=""><img src="../static/images/like.png" />0</a>
+              <a href=""><img src="../static/images/dislike.png" />0</a>
+              <a href=""><img src="../static/images/share.png" />Share</a>
+              <a href=""><img src="../static/images/save.png" />Save</a>
+            </div>
+          </div>
+          <hr />
+          <div class="publisher">
+            <img src="../static/images/Jack.png" />
+            <div>
+              {% for user in users%} {% if user.id == library.user_id%}
+              <p>{{ user.username }}</p>
+              <span>500k Subscribers</span>
+            </div>
+            <button type="button">Subscribe</button>
+          </div>
+          {% endif %} {% endfor %}
+          <div class="vid-description">
+            <p>{{ library.description }}</p>
+            <p>Subscribe here to watch more</p>
+            <hr />
+            <h4>134 Comments</h4>
+            <div class="add-comment">
+              <img src="../static/images/Jack.png" />
+              <input type="text" placeholder="Write comments..." />
+            </div>
+          </div>
+        </div>
+        <div class="right-sidebar">
+          {% for content in contents %} {% if loop.index <= 7 %}
+          <div class="side-video-list">
+            <a href="play/{{ content.id }}">
+              <video
+                autoplay
+                src="{{ content.content }}"
+                class="small-thumbnail"
+              ></video>
+            </a>
+            <div class="vid-info">
+              {% for user in users %} {% if user.id == content.user_id %}
+              <a href="play/{{ content.id }}"
+                >{{ user.first_name }} {{ user.last_name }}</a
+              >
+              {% endif %} {% endfor %}
+              <p>{{ content.description }}</p>
+              <p>{{ content.number_of_views }} views</p>
+            </div>
+          </div>
+          {% endif %} {% endfor %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

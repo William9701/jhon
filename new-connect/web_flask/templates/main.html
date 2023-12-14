@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<HTML lang="en">
+    <HEAD>
+        <TITLE>Connect</TITLE>
+    </HEAD>
+    <BODY>
+        <H1>Contents</H1>
+        <UL>
+	    {% for content in contents %}
+            <LI>{{ content["id"] }}: <B>{{ content["content"] }}</B></LI>
+	    {% endfor %}
+        </UL>
+    </BODY>
+</HTML>

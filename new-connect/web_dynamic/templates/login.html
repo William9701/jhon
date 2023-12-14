@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="../static/styles/login.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="../static/scripts/login-connect.js ?cache_id={{ cache_id }}"></script>
+    script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="toast" data-autohide="true" data-delay="5000">
+      <div class="toast-header">
+        <strong class="mr-auto">Message</strong>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">
+          ×
+        </button>
+      </div>
+      <div class="toast-body">
+        <!-- The message will be inserted here -->
+      </div>
+    </div>
+    <div class="loginbox">
+      <img src="../static/images/user.png" class="avatar" />
+      <h1>Login Here</h1>
+      <form
+        action="{{ url_for('login') }}"
+        method="post"
+        onsubmit="return validateForm()"
+      >
+        <p>Username</p>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          placeholder="Enter Username"
+        />
+        <p>Password</p>
+        <div class="input-box">
+          <input
+            id="password"
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+          />
+          <img id="eyeicon" src="../static/images/eye-close.png" />
+        </div>
+        <input type="submit" name="" value="Login" />
+        <a href="#">Lost your password?</a><br />
+        <a href="/signup">Don't have an account?</a>
+      </form>
+    </div>
+
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul class="flashes">
+      {% for message in messages %}
+      <li id="flashMessage">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+
+    <script>
+      let eyeicon = document.getElementById("eyeicon");
+      let password = document.getElementById("password");
+      eyeicon.onclick = function () {
+        if (password.type == "password") {
+          password.type = "text";
+          eyeicon.src = "../static/images/eye-open.png";
+        } else {
+          password.type = "password";
+          eyeicon.src = "../static/images/eye-close.png";
+        }
+      };
+
+      setTimeout(function () {
+        $("#flashMessage").fadeOut("fast");
+      }, 3000); // <-- time in milliseconds, 3000ms = 3s
+    </script>
+  </body>
+</html>
