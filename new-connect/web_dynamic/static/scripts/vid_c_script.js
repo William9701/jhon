@@ -4,39 +4,38 @@ let client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 //#2
 //#1 - Config setup
 let config = {
-    appid: "acbf8699486446d187af549922bbb88c",
-    token: null,
-    uid: null,
-    channel: null,
-  };
-  
-  //#2 - Setting tracks for when user joins
-  let localTracks = {
-    audioTrack: null,
-    videoTrack: null,
-  };
-  
-  //#3 - Want to hold state for users audio and video so user can mute and hide
-  let localTrackState = {
-    audioTrackMuted: false,
-    videoTrackMuted: false,
-  };
-  
-  //#4 - Set remote tracks to store other users
-  let remoteTracks = {};
-  
-  document.getElementById("join-btn").addEventListener("click", function () {
-    let roomName = document.querySelector('input[name="channel"]').value;
-    config.channel = roomName;
-  });
-  
-  document.getElementById("join-btn").addEventListener("click", async () => {
-    config.uid = document.getElementById("username").value;
-    await joinStreams();
-    document.getElementById("join-wrapper").style.display = "none";
-    document.getElementById("footer").style.display = "flex";
-  });
-  
+  appid: "acbf8699486446d187af549922bbb88c",
+  token: null,
+  uid: null,
+  channel: null,
+};
+
+//#2 - Setting tracks for when user joins
+let localTracks = {
+  audioTrack: null,
+  videoTrack: null,
+};
+
+//#3 - Want to hold state for users audio and video so user can mute and hide
+let localTrackState = {
+  audioTrackMuted: false,
+  videoTrackMuted: false,
+};
+
+//#4 - Set remote tracks to store other users
+let remoteTracks = {};
+
+document.getElementById("join-btn").addEventListener("click", function () {
+  let roomName = document.querySelector('input[name="channel"]').value;
+  config.channel = roomName;
+});
+
+document.getElementById("join-btn").addEventListener("click", async () => {
+  config.uid = document.getElementById("username").value;
+  await joinStreams();
+  document.getElementById("join-wrapper").style.display = "none";
+  document.getElementById("footer").style.display = "flex";
+});
 
 document.getElementById("mic-btn").addEventListener("click", async () => {
   //Check if what the state of muted currently is
@@ -124,7 +123,17 @@ let joinStreams = async () => {
       AgoraRTC.createCameraVideoTrack(),
     ]);
 
+  // #7 - Adjust camera settings (video encoder configuration)
+  const videoEncoderConfig = {
+    width: 640, // Set the desired width of the video
+    height: 480, // Set the desired height of the video
+    frameRate: AgoraRTC.FRAME_RATE_FPS_30, // Set the desired frame rate
+    bitrate: 1200, // Set the desired bitrate (in Kbps)
+    orientationMode: AgoraRTC.ORIENTATION_MODE_ADAPTIVE, // Set the orientation mode
+  };
+
   //#7 - Create player and add it to player list
+  await localTracks.videoTrack.setEncoderConfiguration(videoEncoderConfig);
   let player = `<div class="video-containers" id="video-wrapper-${config.uid}">
                         <p class="user-uid"><img class="volume-icon" id="volume-${config.uid}" src="../static/images/volume-on.svg" /> ${config.uid}</p>
                         <div class="video-player player" id="stream-${config.uid}"></div>

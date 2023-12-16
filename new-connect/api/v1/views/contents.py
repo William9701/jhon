@@ -38,13 +38,19 @@ def delete_content(content_id):
     """
     Deletes a content Object
     """
+    from models.location import Location
 
     content = storage.get(Content, content_id)
 
     if not content:
         abort(404)
+    else:
+        locations = storage.all(Location).values()
+        for location in locations:
+            if location.content_id == content.id:
+                storage.delete(location)
+        storage.delete(content)
 
-    storage.delete(content)
     storage.save()
 
     return make_response(jsonify({}), 200)

@@ -115,6 +115,75 @@ document.addEventListener("DOMContentLoaded", function () {
     sidebar.classList.toggle("small-sidebar");
     container.classList.toggle("large-container");
   };
+  setInterval(function () {
+    console.log("Interval function called");
+
+    // Fetch contents
+    fetch("http://127.0.0.1:5001/api/v1/contents")
+      .then((response) => response.json())
+      .then((contents) => {
+        // Fetch users
+        fetch("http://127.0.0.1:5001/api/v1/users")
+          .then((response) => response.json())
+          .then((users) => {
+            // Clear the existing content in the container
+            var container = document.querySelector(".list-container");
+            container.innerHTML = "";
+
+            // Iterate over contents and update the container
+            contents.forEach((content) => {
+              var vidList = document.createElement("div");
+              vidList.className = "vid-list";
+
+              var link = document.createElement("a");
+              link.href = "play/" + content.id;
+
+              var video = document.createElement("video");
+              video.autoplay = true;
+              video.src = content.content;
+              video.className = "thumbnail";
+
+              link.appendChild(video);
+              vidList.appendChild(link);
+
+              var flexDiv = document.createElement("div");
+              flexDiv.className = "flex-div";
+
+              var img = document.createElement("img");
+              img.src = "../static/images/Jack.png";
+
+              var vidInfo = document.createElement("div");
+              vidInfo.className = "vid-info";
+
+              users.forEach((user) => {
+                if (user.id == content.user_id) {
+                  var userLink = document.createElement("a");
+                  userLink.href = "play/" + content.id;
+                  userLink.textContent = user.first_name + " " + user.last_name;
+                  vidInfo.appendChild(userLink);
+                }
+              });
+
+              var descriptionParagraph = document.createElement("p");
+              descriptionParagraph.textContent = content.description;
+
+              var viewsParagraph = document.createElement("p");
+              viewsParagraph.textContent = content.number_of_views + " views";
+
+              vidInfo.appendChild(descriptionParagraph);
+              vidInfo.appendChild(viewsParagraph);
+
+              flexDiv.appendChild(img);
+              flexDiv.appendChild(vidInfo);
+              vidList.appendChild(flexDiv);
+
+              container.appendChild(vidList);
+            });
+          })
+          .catch((error) => console.error("Error fetching users:", error));
+      })
+      .catch((error) => console.error("Error fetching contents:", error));
+  }, 600000);
 });
 
 /* --------this part is for the location icon querry side ----*/

@@ -2,7 +2,9 @@ var recordedBlobs = [];
 var filename;
 window.onload = function () {
   var video = document.getElementById("video");
+  var previewVideo = document.getElementById("previewVideo");
   var mediaRecorder;
+  var saveButton = document.getElementById("saveButton");
 
   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     navigator.mediaDevices
@@ -22,49 +24,63 @@ window.onload = function () {
 
         mediaRecorder.onstop = function () {
           var blob = new Blob(recordedBlobs, { type: "video/mp4" });
-          var url = window.URL.createObjectURL(blob);
 
-          // Create a unique filename using the current date and time
-          filename = generateFilename();
+          previewVideo.src = window.URL.createObjectURL(blob);
 
-          // Send the data to a server
-          var formData = new FormData();
-          formData.append("file", blob, filename);
-          fetch("/upload", {
-            method: "POST",
-            body: formData,
-          })
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Network response was not ok");
-              }
-              return response.blob();
+          previewVideo.style.display = "block"; // Show the preview video element
+          video.style.display = "none"; // Hide the original video element
+          saveButton.style.display = "block";
+
+          saveButton.addEventListener("click", function () {
+            var url = window.URL.createObjectURL(blob);
+
+            // Create a unique filename using the current date and time
+            filename = generateFilename();
+
+            // Send the data to a server
+            var formData = new FormData();
+            formData.append("file", blob, filename);
+            fetch("/upload", {
+              method: "POST",
+              body: formData,
             })
-            .then((data) => {
-              console.log("File sent to the server successfully");
-              var userId = document.body.getAttribute("data-user-id");
-              console.log(userId);
-              console.log(filename);
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Network response was not ok");
+                }
+                return response.blob();
+              })
+              .then((data) => {
+                console.log("File sent to the server successfully");
+                var userId = document.body.getAttribute("data-user-id");
+                console.log(userId);
+                console.log(filename);
 
-              // Prompt the user for the content description
-              var contentDescription = prompt(
-                "Please enter the content description:"
-              );
+                // Prompt the user for the content description
+                var contentDescription = prompt(
+                  "Please enter the content description:"
+                );
 
-              // Pass the content description to the createContentTable function
-              createContentTable(userId, contentDescription);
-            })
-            .catch((error) => {
-              console.error(
-                "There has been a problem with your fetch operation:",
-                error
-              );
-            });
+                // Pass the content description to the createContentTable function
+                createContentTable(userId, contentDescription);
+
+                // Go back to the previous page
+                setTimeout(function () {
+                  window.location.reload();
+                }, 4000);
+              })
+              .catch((error) => {
+                console.error(
+                  "There has been a problem with your fetch operation:",
+                  error
+                );
+              });
+          });
         };
       });
   }
 
-  document.getElementById("snap").addEventListener("click", function () {
+  /* document.getElementById("snap").addEventListener("click", function () {
     var canvas = document.createElement("canvas");
     canvas.width = 640;
     canvas.height = 480;
@@ -96,18 +112,23 @@ window.onload = function () {
             error
           );
         });
-    }, "image/png");
-  });
+    },  "image/png"); 
+  }); */
 
   document.getElementById("start").addEventListener("click", function () {
     recordedBlobs = [];
     // Generate filename at the start of recording
 
     mediaRecorder.start();
+    saveButton.style.display = "none"; // Hide save button during recording
+    previewVideo.style.display = "none"; // Hide preview during recording
+    video.style.display = "block"; // Show the original video element
   });
 
   document.getElementById("stop").addEventListener("click", function () {
     flashEffect(); // Call the flash effect function
+    var container = document.getElementsByClassName("container")[0];
+    container.style.position = "inherit";
     setTimeout(function () {
       mediaRecorder.stop();
     }, 2000); // Wait for 2 seconds before stopping the recording

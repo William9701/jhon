@@ -12,11 +12,13 @@ class Location(Basemodels, Base):
     __tablename__ = "locations"
     if models.storage_t == "db":
         user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
-        content_id = Column(String(60), ForeignKey('contents.id'), nullable=False)
+        content_id = Column(String(60), ForeignKey('contents.id', ondelete='CASCADE'), nullable=False)
         name = Column(String(128), nullable=False)
         latitude = Column(Float, nullable=True)
         longitude = Column(Float, nullable=True)
-        contents = relationship("Content", backref="location", foreign_keys="[Content.location_id]")
+        contents = relationship("Content", backref="location", foreign_keys="[Content.location_id]", cascade="all, "
+                                                                                                             "delete, "
+                                                                                                             "delete-orphan")
 
         def __setattr__(self, name, value):
             """sets a password with md5 encryption"""

@@ -12,7 +12,7 @@ class Content(Basemodels, Base):
     __tablename__ = 'contents'
     if models.storage_t == "db":
         user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
-        location_id = Column(String(60), ForeignKey('locations.id'), nullable=True)
+        location_id = Column(String(60), ForeignKey('locations.id', ondelete='CASCADE'), nullable=True)
         content = Column(String(128), nullable=False)  # This will store the path to the video file
         description = Column(String(255), nullable=True)
         number_of_likes = Column(Integer, default=0)

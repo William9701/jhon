@@ -83,6 +83,24 @@ def upload_snap():
     return 'File uploaded successfully'
 
 
+@app.route('/deleteContent/<content_id>', methods=['DELETE'], strict_slashes=False)
+def delete_file(content_id):
+    # Get the file path
+    content = storage.get(Content, content_id)
+    file_path = content.content
+    # Extract the filename from the file path
+    filename = os.path.basename(file_path)
+    file_path = os.path.join(os.pardir, 'new-connect', 'web_dynamic',
+                             'static', 'vidFiles', 'videos', filename)
+    # Check if the file exists
+    if os.path.exists(file_path):
+        # Delete the file
+        os.remove(file_path)
+        return 'File deleted successfully'
+    else:
+        return 'File not found'
+
+
 @app.route('/login', strict_slashes=False, methods=['GET', 'POST'])
 def login():
     cache_id = str(uuid.uuid4())
@@ -171,17 +189,6 @@ def vid_chat_s(user_id):
     return render_template('sender.html', user=user)
 
 
-@app.route('/library/<string:user_id>', strict_slashes=False)
-def library(user_id):
-    # Fetch user data using user_id
-    user = storage.get(User, user_id)
-    libraries = storage.all(Library).values()
-    if user is None:
-        # Handle the case where the user with the given ID is not found
-        abort(404)
-    return render_template('library.html', user=user, libraries=libraries)
-
-
 @app.route('/play-lib/<string:content_id>', strict_slashes=False)
 def play_lib(content_id):
     """ play page """
@@ -192,9 +199,22 @@ def play_lib(content_id):
     return render_template('play-lib.html', library=library, users=users, contents=contents, locations=locations)
 
 
+@app.route('/library/<string:user_id>', strict_slashes=False)
+def library(user_id):
+    # Fetch user data using user_id
+    user = storage.get(User, user_id)
+    contents = storage.all(Content).values()
+
+    if user is None:
+        # Handle the case where the user with the given ID is not found
+        abort(404)
+    return render_template('library.html', user=user, contents=contents)
+
+
 @app.route('/vid-c/', strict_slashes=False)
 def vid_c():
     return render_template('vid_c_index.html')
+
 
 if __name__ == "__main__":
     """ Main Function """

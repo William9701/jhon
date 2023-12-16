@@ -56,7 +56,7 @@
     <!-------------------------sidebar---------------->
     <div class="sidebar small-sidebar">
       <div class="shortcut-links">
-        <a href="#"
+        <a href="/user_index/{{ user.id }}"
           ><img src="../static/images/home.png" alt="" />
           <p>Home</p></a
         >
@@ -123,9 +123,9 @@
         <h3>A place where we only share live videos</h3>
         <h2>Welcome {{ user.first_name}}</h2>
         <div class="flex-btn">
-          <a href="/vid-c" class="hero-btn">Create Room</a>
-          <a href="/vid-chat" class="hero-btn">Join Room</a>
-          <a href="/lobby" class="hero-btn">Share Content</a>
+          <a href="/vid-c" class="hero-btn">Room</a>
+          <a href="/camera/{{ user.id }}" class="hero-btn">Local Post</a>
+          <a href="/lobby" class="hero-btn">Live Broadcast</a>
         </div>
       </div>
       <div class="list-container">

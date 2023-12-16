@@ -352,7 +352,11 @@ nav{
 	display: block;
 	margin-bottom: 5px;
 }
+#delete_logo{
+	width: 20px;
 
+	margin-left: 180px;
+}
 @media (max-width: 900px){
 	.nav-midle .search-box input{
 		font-size: 20px;

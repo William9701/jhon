@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Connect</title>
     <link rel="stylesheet" href="../static/styles/stlye.css" />
-    <script src="../static/scripts/script.js"></script>
+    <script src="../static/scripts/lib-script.js"></script>
   </head>
   <body>
     <nav class="flex-div">
@@ -56,7 +56,7 @@
     <!-------------------------sidebar---------------->
     <div class="sidebar small-sidebar">
       <div class="shortcut-links">
-        <a href="/user_index/{{ user.id }}"
+        <a href="#"
           ><img src="../static/images/home.png" alt="" />
           <p>Home</p></a
         >
@@ -119,12 +119,12 @@
 
     <div class="container">
       <div class="list-container">
-        {% for library in libraries %} {%if user.id == library.user_id%}
+        {% for content in contents %} {%if content.user_id == user.id%}
         <div class="vid-list">
-          <a href="/play-lib/{{ library.id }}">
+          <a href="/play/{{ content.id }}">
             <video
               autoplay
-              src="{{ library.content }}"
+              src="{{ content.content }}"
               class="thumbnail"
             ></video>
           </a>
@@ -132,17 +132,50 @@
           <div class="flex-div">
             <img src="../static/images/Jack.png" />
             <div class="vid-info">
-              {% for user in users %} {% if user.id == library.user_id %}
               <a href="play/{{ content.id }}"
                 >{{ user.first_name }} {{ user.last_name }}</a
               >
-              {% endif %} {% endfor %}
-              <p>{{ library.description }}</p>
+
+              <p>{{ content.description }}</p>
+              <p>{{ content.number_of_views }} views</p>
             </div>
+            <a href="#" onclick="deleteContent('{{content.id}}', event)">
+              <img
+                id="delete_logo"
+                class="delete"
+                src="../static/images/trash.png"
+                alt=""
+              />
+            </a>
           </div>
         </div>
         {% endif %}{% endfor %}
       </div>
     </div>
+    <script>
+      function deleteContent(content_id, event) {
+        console.log("delete called");
+        event.preventDefault(); // Prevent the default behavior (page reload)
+
+        fetch("/deleteContent/" + content_id, {
+          method: "DELETE",
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            console.log("file deleted " + data);
+            fetch("http://127.0.0.1:5001/api/v1/contents/" + content_id, {
+              method: "DELETE",
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                console.log("deleted " + data);
+                window.location.reload();
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+              });
+          });
+      }
+    </script>
   </body>
 </html>
